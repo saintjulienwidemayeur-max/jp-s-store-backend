@@ -3,7 +3,7 @@
 Supabase backend for the JP's Logistics & More store (separate project from the internal logistics system).
 
 - `sql/schema.sql` — full schema (tables, RLS, RPCs, storage bucket, seed). Run once in the Supabase SQL Editor on a new project. Idempotent.
-- `sql/migrations/` — incremental migrations (already merged into `schema.sql`; use them to upgrade an existing database).
+- `sql/migrations/` — incremental migrations (already merged into `schema.sql`; use them to upgrade an existing database). `004_categories_collections.sql` makes categories admin-managed collections (description, parent, featured/active, sort; public reads active only, admins write) and adds `products.is_featured`. The seed is intentionally honest: only the Fan Zone category and its 4 real products; add everything else in the admin.
 - `supabase/functions/create-checkout` — creates a Stripe Checkout Session for an order (amount recomputed from the database).
 - `supabase/functions/stripe-webhook` — verifies Stripe signatures and marks orders paid (idempotent).
 - `supabase/functions/generate-3d` — image-to-3D jobs (Meshy by default, swappable provider).
